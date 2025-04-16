@@ -94,6 +94,76 @@ GET | /api/files/:id/permissions | Get file permissions | ✅ (User)
 PUT | /api/files/:id/permissions | Update file permissions | ✅ (User)
 GET | /api/files/search | Search user's files | ✅ (User)
 
+Database Schema
+
+mysql> use data_drive;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_data_drive |
++----------------------+
+| file_permissions     |
+| files                |
+| roles                |
+| users                |
++----------------------+
+4 rows in set (0.00 sec)
+
+mysql> desc file_permissions;
++---------+-----------------+------+-----+---------+-------+
+| Field   | Type            | Null | Key | Default | Extra |
++---------+-----------------+------+-----+---------+-------+
+| file_id | bigint unsigned | NO   | PRI | NULL    |       |
+| user_id | bigint unsigned | NO   | PRI | NULL    |       |
++---------+-----------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc files;
++-------------+-----------------+------+-----+---------+----------------+
+| Field       | Type            | Null | Key | Default | Extra          |
++-------------+-----------------+------+-----+---------+----------------+
+| id          | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| created_at  | datetime(3)     | YES  |     | NULL    |                |
+| updated_at  | datetime(3)     | YES  |     | NULL    |                |
+| name        | longtext        | YES  |     | NULL    |                |
+| type        | longtext        | YES  |     | NULL    |                |
+| path        | longtext        | YES  |     | NULL    |                |
+| user_id     | bigint unsigned | YES  | MUL | NULL    |                |
+| parent_id   | bigint unsigned | YES  | MUL | NULL    |                |
+| version     | bigint unsigned | YES  |     | NULL    |                |
+| size        | bigint          | YES  |     | NULL    |                |
+| permissions | longtext        | YES  |     | NULL    |                |
++-------------+-----------------+------+-----+---------+----------------+
+11 rows in set (0.00 sec)
+
+mysql> desc roles;
++-------------+-----------------+------+-----+---------+----------------+
+| Field       | Type            | Null | Key | Default | Extra          |
++-------------+-----------------+------+-----+---------+----------------+
+| id          | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| created_at  | datetime(3)     | YES  |     | NULL    |                |
+| updated_at  | datetime(3)     | YES  |     | NULL    |                |
+| deleted_at  | datetime(3)     | YES  | MUL | NULL    |                |
+| name        | longtext        | YES  |     | NULL    |                |
+| description | longtext        | YES  |     | NULL    |                |
++-------------+-----------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> desc users;
++------------+-----------------+------+-----+---------+----------------+
+| Field      | Type            | Null | Key | Default | Extra          |
++------------+-----------------+------+-----+---------+----------------+
+| id         | bigint unsigned | NO   | PRI | NULL    | auto_increment |
+| created_at | datetime(3)     | YES  |     | NULL    |                |
+| updated_at | datetime(3)     | YES  |     | NULL    |                |
+| name       | longtext        | YES  |     | NULL    |                |
+| email      | varchar(191)    | YES  | UNI | NULL    |                |
+| password   | longtext        | YES  |     | NULL    |                |
+| role_id    | bigint unsigned | YES  | MUL | NULL    |                |
++------------+-----------------+------+-----+---------+----------------+
+7 rows in set (0.01 sec)
+
+mysql> 
 
 👩‍💻 Author
 
